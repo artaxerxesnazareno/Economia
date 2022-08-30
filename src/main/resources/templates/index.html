@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Economia 50 40 10</title>
+
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+
+</head>
+<body class="p-3 mb-2 bg-dark text-white">
+
+<div class="container">
+    <h1>Economia 50 40 10</h1>
+    <form action="#" th:action="@{/}" th:object="${renda}" method="post">
+        <table>
+            <tr>
+                <td>Nome:</td>
+                <td><input type="text" th:field="*{nome}"/></td>
+                <td th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Name Error</td>
+            </tr>
+            <tr>
+                <td>Descrição:</td>
+                <td><input type="text" th:field="*{descricao}"/></td>
+                <td th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}">Age Error</td>
+            </tr>
+            <tr>
+                <td>Valor:</td>
+                <td><input type="text" th:field="*{valor}"/></td>
+                <td th:if="${#fields.hasErrors('valor')}" th:errors="*{valor}">Age Error</td>
+            </tr>
+            <tr>
+                <td>
+                    <button type="submit">Submit</button>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <div class="card border-info text-white bg-dark mb-3" style="max-width: 18rem;">
+        <div th:each="plano : ${planos}">
+            <div class="card-header"><span th:text=" 'Data: '+ ${plano.data.year} "></span></div>
+            <div class="card-body">
+
+
+                <h5 class="card-title" th:text="'Total: AOA ' +${plano.total}">Total </h5>
+
+
+                <ul class="list-group list-group-flush d-flex justify-content-start">
+                    <li class="list-group-item list-group-item-dark"><span th:text="'AOA ' + ${plano.cinquenta}"/>
+                        <img
+                                src="/img/50.png" width="40">
+                    </li>
+                    <li class="list-group-item list-group-item-dark"><span th:text="'AOA ' + ${plano.quarenta}"/>
+                        <img
+                                src="/img/40.png" width="40">
+                    </li>
+                    <li class="list-group-item list-group-item-dark"><span th:text="'AOA ' + ${plano.dez}"/> <img
+                            src="/img/10.png" width="40">
+                    </li>
+
+                </ul>
+            </div>
+
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-dark table-striped table-hover">
+            <thead >
+            <tr class="table-dark">
+                <th scope="col">ID</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Descrição</th>
+                <th scope="col">Valor</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="renda : ${rendas}">
+                <th scope="row" th:text="${renda.id}"></th>
+                <td th:text="${renda.nome}"></td>
+                <td th:text="${renda.descricao}"></td>
+                <td th:text="'AOA ' + ${renda.valor}"></td>
+            </tr>
+            </tbody>
+    </div>
+</div>
+</body>
+</html>
